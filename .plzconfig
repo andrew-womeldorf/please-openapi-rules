@@ -1,2 +1,9 @@
 [please]
 version = >=16.18.0
+
+[PluginDefinition]
+name = openapi
+
+[PluginConfig "generator_tool"]
+ConfigKey = GeneratorTool
+DefaultValue = //third_party/java:openapi-generator-cli
