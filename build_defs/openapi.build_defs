@@ -40,7 +40,7 @@ def openapi_generate(name: str, srcs: list, spec: str, generator: str, config: s
         ],
         output_dirs = output_dirs,
         tools = {
-            "generator": CONFIG.OPENAPI.GENERATOR_TOOL,
+            "generator": CONFIG.PLEASE_OPENAPI.GENERATOR_TOOL,
         },
         labels = labels + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,

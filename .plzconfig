@@ -2,7 +2,7 @@
 version = >=16.19.0
 
 [PluginDefinition]
-name = please-openapi
+name = please_openapi
 
 [PluginConfig "generator_tool"]
 ConfigKey = GeneratorTool
