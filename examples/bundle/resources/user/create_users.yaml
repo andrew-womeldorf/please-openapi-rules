@@ -1,0 +1,24 @@
+tags:
+- user
+summary: Creates list of users with given input array
+description: Creates list of users with given input array
+operationId: createUsersWithListInput
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: array
+        items:
+          $ref: '../../components/schemas/user.yaml'
+responses:
+  "200":
+    description: Successful operation
+    content:
+      application/xml:
+        schema:
+          $ref: '../../components/schemas/user.yaml'
+      application/json:
+        schema:
+          $ref: '../../components/schemas/user.yaml'
+  default:
+    description: successful operation

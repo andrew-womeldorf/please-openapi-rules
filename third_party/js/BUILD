@@ -1,4 +1,5 @@
 subinclude("///please-js//build_defs:js")
+package(default_visibility = ["PUBLIC"])
 
 yarn_library(
     name = "@babel--code-frame",

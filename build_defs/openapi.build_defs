@@ -45,3 +45,24 @@ def openapi_generate(name: str, srcs: list, spec: str, generator: str, config: s
         labels = labels + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,
     )
+
+
+def openapi_bundle(name: str, srcs: list, entrypoint: str, out: str="openapi.yaml", labels:list&features&tags=[], visibility: list=["PUBLIC"]):
+    """Compile an OpenAPI Spec which is in multiple files into a single file.
+
+    Args:
+      name (str): Name of the rule.
+      srcs (list): Input spec file.
+      entrypoint (str): Name of the file that serves as the entrypoint.
+      out (str): Name of the file to create which is the whole spec.
+      visibility (list): Visibility specification for the rule.
+    """
+    return genrule(
+        name = name,
+        srcs = srcs,
+        outs = [out],
+        cmd = f"$TOOL bundle $(location {entrypoint}) >> $OUT",
+        tools = ["//third_party/js:openapi-cli"],
+        labels = labels + _DEFAULT_OPENAPI_LABELS,
+        visibility = visibility,
+    )
