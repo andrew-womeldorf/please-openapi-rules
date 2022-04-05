@@ -132,7 +132,7 @@ def openapi_lint(name: str, srcs: list, entrypoint: str, linters: str|list|dict=
         outs = [out],
         tools = {
             "redocly": CONFIG.PLEASE_OPENAPI.OPENAPI_TOOL,
-            "spectral": "//third_party/js:spectral-cli",
+            "spectral": CONFIG.PLEASE_OPENAPI.SPECTRAL_TOOL,
         },
         binary = True,
         labels = labels + _DEFAULT_OPENAPI_LABELS,
@@ -188,7 +188,7 @@ def openapi_docs(name: str, srcs: list, entrypoint: str, out: str="openapi.html"
         srcs = srcs,
         outs = [out],
         cmd = f"$TOOL bundle $(location {entrypoint} {flags}) --output $OUT",
-        tools = ["//third_party/js:redoc-cli"],
+        tools = [CONFIG.PLEASE_OPENAPI.REDOC_TOOL],
         labels = labels + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,
     )
