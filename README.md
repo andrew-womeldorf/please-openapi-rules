@@ -26,9 +26,36 @@ Use it in a `BUILD` file:
 # some_dir/BUILD
 subinclude("///please-openapi//build_defs:openapi")
 
-openapi_generate(
+filegroup(
     name = "spec",
-    srcs = ["openapi.yaml"],
+    srcs = glob(["**/*.yaml"]),
+)
+
+openapi_bundle(
+    name = "yaml",
+    srcs = [":spec"],
+    entrypoint = "petstore.yaml",
+    out = "openapi.yaml",
+)
+
+openapi_lint(
+    name = "lint",
+    srcs = [
+        ":yaml",
+        "spectral.json",
+    ],
+    entrypoint = "openapi.yaml",
+)
+
+openapi_preview(
+    name = "preview",
+    srcs = [":yaml"],
+    entrypoint = "openapi.yaml",
+)
+
+openapi_generate(
+    name = "generate",
+    srcs = [":yaml"],
     spec = "openapi.yaml",
     generator = "go-server",
 )

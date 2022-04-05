@@ -138,3 +138,32 @@ def openapi_lint(name: str, srcs: list, entrypoint: str, linters: str|list|dict=
         labels = labels + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,
     )
+
+
+def openapi_preview(name: str, srcs: list, entrypoint: str, out: str="preview.sh", extra_flags: list=[], labels:list&features&tags=[], visibility: list=["PUBLIC"]):
+    """Start a local webserver with the spec generated with redocly.
+
+    Args:
+      name (str): Name of the rule.
+      srcs (list): Input spec file.
+      entrypoint (str): Name of the file that serves as the entrypoint.
+      extra_flags (list): Additional flags to pass to the tool.
+      out (str): Name of the file to create which is the whole spec.
+      visibility (list): Visibility specification for the rule.
+    """
+
+    flags = ' '.join(extra_flags)
+
+    return genrule(
+        name = name,
+        srcs = srcs,
+        outs = [out],
+        cmd = [
+            'echo "#!/usr/bin/env bash" > $OUT',
+            f'echo "$TOOL preview-docs $(location {entrypoint} {flags})" >> $OUT',
+        ],
+        tools = ["//third_party/js:openapi-cli"],
+        binary = True,
+        labels = labels + _DEFAULT_OPENAPI_LABELS,
+        visibility = visibility,
+    )
