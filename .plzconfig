@@ -7,3 +7,7 @@ name = please_openapi
 [PluginConfig "generator_tool"]
 ConfigKey = GeneratorTool
 DefaultValue = //third_party/java:openapi-generator-cli
+
+[PluginConfig "openapi_tool"]
+ConfigKey = OpenAPITool
+DefaultValue = //third_party/js:openapi-cli

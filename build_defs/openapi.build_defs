@@ -66,7 +66,7 @@ def openapi_bundle(name: str, srcs: list, entrypoint: str, out: str="openapi.yam
         srcs = srcs,
         outs = [out],
         cmd = f"$TOOL bundle $(location {entrypoint}) {flags} --output $OUT",
-        tools = ["//third_party/js:openapi-cli"],
+        tools = [CONFIG.PLEASE_OPENAPI.OPENAPI_TOOL],
         labels = labels + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,
     )
@@ -131,7 +131,7 @@ def openapi_lint(name: str, srcs: list, entrypoint: str, linters: str|list|dict=
         cmd = cmd,
         outs = [out],
         tools = {
-            "redocly": "//third_party/js:openapi-cli",
+            "redocly": CONFIG.PLEASE_OPENAPI.OPENAPI_TOOL,
             "spectral": "//third_party/js:spectral-cli",
         },
         binary = True,
@@ -162,7 +162,7 @@ def openapi_preview(name: str, srcs: list, entrypoint: str, out: str="preview.sh
             'echo "#!/usr/bin/env bash" > $OUT',
             f'echo "$TOOL preview-docs $(location {entrypoint} {flags})" >> $OUT',
         ],
-        tools = ["//third_party/js:openapi-cli"],
+        tools = [CONFIG.PLEASE_OPENAPI.OPENAPI_TOOL],
         binary = True,
         labels = labels + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,
