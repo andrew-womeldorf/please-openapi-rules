@@ -47,6 +47,12 @@ openapi_lint(
     entrypoint = "openapi.yaml",
 )
 
+openapi_docs(
+    name = "docs",
+    srcs = [":yaml"],
+    entrypoint = "openapi.yaml",
+)
+
 openapi_preview(
     name = "preview",
     srcs = [":yaml"],

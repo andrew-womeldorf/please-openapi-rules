@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - `openapi_bundle` rule
+- `openapi_docs` rule
 - `openapi_preview` rule
 - `openapi_lint` rule
 - lint with spectral
