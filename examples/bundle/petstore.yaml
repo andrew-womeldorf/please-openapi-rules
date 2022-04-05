@@ -1,0 +1,134 @@
+openapi: 3.0.2
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: "This is a sample Pet Store Server based on the OpenAPI 3.0 specification.\
+    \  You can find out more about\nSwagger at [http://swagger.io](http://swagger.io).\
+    \ In the third iteration of the pet store, we've switched to the design first\
+    \ approach!\nYou can now help us improve the API whether it's by making changes\
+    \ to the definition itself or to the code.\nThat way, with time, we can improve\
+    \ the API in general, and expose some of the new features in OAS3.\n\nSome useful\
+    \ links:\n- [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)\n\
+    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)"
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: /api/v3
+tags:
+- name: pet
+  description: Everything about your Pets
+  externalDocs:
+    description: Find out more
+    url: http://swagger.io
+- name: store
+  description: Access to Petstore orders
+  externalDocs:
+    description: Find out more about our store
+    url: http://swagger.io
+- name: user
+  description: Operations about user
+paths:
+  /pet:
+    put:
+      $ref: './resources/pet/update_pet.yaml'
+    post:
+      $ref: './resources/pet/create_pet.yaml'
+  /pet/findByStatus:
+    get:
+      $ref: './resources/pet/find_pet_by_status.yaml'
+  /pet/findByTags:
+    get:
+      $ref: './resources/pet/find_pet_by_tags.yaml'
+  /pet/{petId}:
+    get:
+      $ref: './resources/pet/get_pet_by_id.yaml'
+    post:
+      $ref: './resources/pet/update_pet_by_id.yaml'
+    delete:
+      $ref: './resources/pet/delete_pet.yaml'
+  /store/inventory:
+    get:
+      $ref: './resources/stores/get_inventory.yaml'
+  /store/order:
+    post:
+      $ref: './resources/stores/place_order.yaml'
+  /store/order/{orderId}:
+    get:
+      $ref: './resources/stores/get_order_by_id.yaml'
+    delete:
+      $ref: './resources/stores/delete_order.yaml'
+  /user:
+    post:
+      $ref: './resources/user/create_user.yaml'
+  /user/createWithList:
+    post:
+      $ref: './resources/user/create_users.yaml'
+  /user/login:
+    get:
+      $ref: './resources/user/login.yaml'
+  /user/logout:
+    get:
+      $ref: './resources/user/logout.yaml'
+  /user/{username}:
+    get:
+      $ref: './resources/user/get_user_by_username.yaml'
+    put:
+      $ref: './resources/user/update_user.yaml'
+    delete:
+      $ref: './resources/user/delete_user.yaml'
+components:
+  schemas:
+    Order:
+      $ref: './components/schemas/order.yaml'
+    Customer:
+      $ref: './components/schemas/customer.yaml'
+    Address:
+      $ref: './components/schemas/address.yaml'
+    Category:
+      $ref: './components/schemas/category.yaml'
+    User:
+      $ref: './components/schemas/user.yaml'
+    Tag:
+      $ref: './components/schemas/tag.yaml'
+    Pet:
+      $ref: './components/schemas/pet.yaml'
+    ApiResponse:
+      $ref: './components/schemas/api_response.yaml'
+  requestBodies:
+    Pet:
+      description: Pet object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: './components/schemas/pet.yaml'
+        application/xml:
+          schema:
+            $ref: './components/schemas/pet.yaml'
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: './components/schemas/user.yaml'
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:pets: modify pets in your account
+            read:pets: read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header

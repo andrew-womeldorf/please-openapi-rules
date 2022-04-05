@@ -45,3 +45,150 @@ def openapi_generate(name: str, srcs: list, spec: str, generator: str, config: s
         labels = labels + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,
     )
+
+
+def openapi_bundle(name: str, srcs: list, entrypoint: str, out: str="openapi.yaml", extra_flags: list=[], labels:list&features&tags=[], visibility: list=["PUBLIC"]):
+    """Compile an OpenAPI Spec which is in multiple files into a single file.
+
+    Args:
+      name (str): Name of the rule.
+      srcs (list): Input spec file.
+      entrypoint (str): Name of the file that serves as the entrypoint.
+      extra_flags (list): Additional flags to pass to the tool.
+      out (str): Name of the file to create which is the whole spec.
+      visibility (list): Visibility specification for the rule.
+    """
+
+    flags = ' '.join(extra_flags)
+
+    return genrule(
+        name = name,
+        srcs = srcs,
+        outs = [out],
+        cmd = f"$TOOL bundle $(location {entrypoint}) {flags} --output $OUT",
+        tools = ["//third_party/js:openapi-cli"],
+        labels = labels + _DEFAULT_OPENAPI_LABELS,
+        visibility = visibility,
+    )
+
+
+def openapi_lint(name: str, srcs: list, entrypoint: str, linters: str|list|dict=None, extra_flags: dict=None, out: str="lint.sh", labels:list&features&tags=[], visibility: list=["PUBLIC"]):
+    """Lint an OpenAPI Spec.
+
+    Tools available:
+      - redocly (@redocly/openapi-cli)
+      - spectral (@stoplight/spectral-cli)
+
+    Args:
+      name (str): Name of the rule.
+      srcs (list): Input spec file.
+      entrypoint (str): Name of the file that serves as the entrypoint.
+      linters (str | list | dict): Linters to use.
+            If given as a string, it's a single linter to be used.
+            If given as a list, each linter will be run with the default rules and flags.
+            If given as a dict, the keys correspond to the linter tool, and the
+            values are additional flags to pass to the linter.
+      out (str): Name of the script file.
+      visibility (list): Visibility specification for the rule.
+    """
+
+    tools = {
+        "redocly": {
+            "cmd": '$TOOLS_REDOCLY lint',
+            "flags": [],
+        },
+        "spectral": {
+            "cmd": '$TOOLS_SPECTRAL lint',
+            "flags": ["--ruleset $(location spectral.json)"],
+        }
+    }
+
+    cmd = [
+        'echo "#!/usr/bin/env bash" > $OUT',
+    ]
+
+    if not linters:
+        linters = ["redocly", "spectral"]
+
+    if isinstance(linters, str):
+        linters = [linters]
+
+    if isinstance(linters, list):
+        for linter in linters:
+            linter_cmd = tools[linter]["cmd"]
+            linter_flags = ' '.join(tools[linter]["flags"])
+            cmd += [f'echo "{linter_cmd} {linter_flags}" $(location {entrypoint}) >> $OUT']
+    
+    if isinstance(linters, dict):
+        for linter, flags in linters.items():
+            linter_cmd = tools[linter]["cmd"]
+            linter_flags = ' '.join(flags) if flags else ' '.join(tools[linter]["flags"])
+            cmd += [f'echo "{linter_cmd} {linter_flags}" $(location {entrypoint}) >> $OUT']
+
+    return genrule(
+        name = name,
+        srcs = srcs,
+        cmd = cmd,
+        outs = [out],
+        tools = {
+            "redocly": "//third_party/js:openapi-cli",
+            "spectral": "//third_party/js:spectral-cli",
+        },
+        binary = True,
+        labels = labels + _DEFAULT_OPENAPI_LABELS,
+        visibility = visibility,
+    )
+
+
+def openapi_preview(name: str, srcs: list, entrypoint: str, out: str="preview.sh", extra_flags: list=[], labels:list&features&tags=[], visibility: list=["PUBLIC"]):
+    """Start a local webserver with the spec generated with redocly.
+
+    Args:
+      name (str): Name of the rule.
+      srcs (list): Input spec file.
+      entrypoint (str): Name of the file that serves as the entrypoint.
+      extra_flags (list): Additional flags to pass to the tool.
+      out (str): Name of the file to create which is the whole spec.
+      visibility (list): Visibility specification for the rule.
+    """
+
+    flags = ' '.join(extra_flags)
+
+    return genrule(
+        name = name,
+        srcs = srcs,
+        outs = [out],
+        cmd = [
+            'echo "#!/usr/bin/env bash" > $OUT',
+            f'echo "$TOOL preview-docs $(location {entrypoint} {flags})" >> $OUT',
+        ],
+        tools = ["//third_party/js:openapi-cli"],
+        binary = True,
+        labels = labels + _DEFAULT_OPENAPI_LABELS,
+        visibility = visibility,
+    )
+
+
+def openapi_docs(name: str, srcs: list, entrypoint: str, out: str="openapi.html", extra_flags: list=[], labels:list&features&tags=[], visibility: list=["PUBLIC"]):
+    """Bundle Redocly Docs as a single HTML file.
+
+    Args:
+      name (str): Name of the rule.
+      srcs (list): Input spec file.
+      entrypoint (str): Name of the file that serves as the entrypoint.
+      extra_flags (list): Additional flags to pass to the tool.
+      out (str): Name of the file to create which is the whole spec.
+      visibility (list): Visibility specification for the rule.
+    """
+
+    flags = ' '.join(extra_flags)
+
+    return genrule(
+        name = name,
+        srcs = srcs,
+        outs = [out],
+        cmd = f"$TOOL bundle $(location {entrypoint} {flags}) --output $OUT",
+        tools = ["//third_party/js:redoc-cli"],
+        labels = labels + _DEFAULT_OPENAPI_LABELS,
+        visibility = visibility,
+    )
