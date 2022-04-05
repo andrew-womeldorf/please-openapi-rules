@@ -2,20 +2,20 @@
 version = >=16.19.0
 
 [PluginDefinition]
-name = please-openapi
+name = please_openapi
 
 [PluginConfig "generator_tool"]
 ConfigKey = GeneratorTool
-DefaultValue = //third_party/java:openapi-generator-cli
+DefaultValue = @self//third_party/java:openapi-generator-cli
 
 [PluginConfig "openapi_tool"]
 ConfigKey = OpenAPITool
-DefaultValue = //third_party/js:openapi-cli
+DefaultValue = @self//third_party/js:openapi-cli
 
 [PluginConfig "redoc_tool"]
 ConfigKey = RedocTool
-DefaultValue = //third_party/js:redoc-cli
+DefaultValue = @self//third_party/js:redoc-cli
 
 [PluginConfig "spectral_tool"]
 ConfigKey = SpectralTool
-DefaultValue = //third_party/js:spectral-cli
+DefaultValue = @self//third_party/js:spectral-cli
