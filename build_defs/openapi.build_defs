@@ -77,6 +77,7 @@ def openapi_lint(name: str, srcs: list, entrypoint: str, linters: str|list|dict=
 
     Tools available:
       - redocly (@redocly/openapi-cli)
+      - spectral (@stoplight/spectral-cli)
 
     Args:
       name (str): Name of the rule.
@@ -91,31 +92,38 @@ def openapi_lint(name: str, srcs: list, entrypoint: str, linters: str|list|dict=
       visibility (list): Visibility specification for the rule.
     """
 
-    cmds = {
-        "redocly": '$TOOLS_REDOCLY lint',
+    tools = {
+        "redocly": {
+            "cmd": '$TOOLS_REDOCLY lint',
+            "flags": [],
+        },
+        "spectral": {
+            "cmd": '$TOOLS_SPECTRAL lint',
+            "flags": ["--ruleset $(location spectral.json)"],
+        }
     }
 
     cmd = [
         'echo "#!/usr/bin/env bash" > $OUT',
-        # 'echo "$TOOLS_SPECTRAL lint --ruleset $(location spectral.json) $(dir :spec)/*.yml" >> $OUT',
     ]
 
     if not linters:
-        linters = ["redocly"]
+        linters = ["redocly", "spectral"]
 
     if isinstance(linters, str):
         linters = [linters]
 
     if isinstance(linters, list):
         for linter in linters:
-            linter_cmd = cmds[linter]
-            cmd += [f'echo "{linter_cmd}" $(location {entrypoint}) >> $OUT']
+            linter_cmd = tools[linter]["cmd"]
+            linter_flags = ' '.join(tools[linter]["flags"])
+            cmd += [f'echo "{linter_cmd} {linter_flags}" $(location {entrypoint}) >> $OUT']
     
     if isinstance(linters, dict):
         for linter, flags in linters.items():
-            linter_cmd = cmds[linter]
-            linter_flags = ' '.join(flags)
-            cmd += [f'echo "{linter_cmd}" $(location {entrypoint}) {linter_flags} >> $OUT']
+            linter_cmd = tools[linter]["cmd"]
+            linter_flags = ' '.join(flags) if flags else ' '.join(tools[linter]["flags"])
+            cmd += [f'echo "{linter_cmd} {linter_flags}" $(location {entrypoint}) >> $OUT']
 
     return genrule(
         name = name,
@@ -123,7 +131,8 @@ def openapi_lint(name: str, srcs: list, entrypoint: str, linters: str|list|dict=
         cmd = cmd,
         outs = [out],
         tools = {
-            "redocly": "//third_party/js:openapi-cli"
+            "redocly": "//third_party/js:openapi-cli",
+            "spectral": "//third_party/js:spectral-cli",
         },
         binary = True,
         labels = labels + _DEFAULT_OPENAPI_LABELS,
