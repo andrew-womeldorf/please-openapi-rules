@@ -1,4 +1,4 @@
-subinclude("///please-js//build_defs:js")
+subinclude("///js//build_defs:js")
 package(default_visibility = ["PUBLIC"])
 
 yarn_library(

@@ -1,5 +1,8 @@
 [please]
-version = >=16.19.0
+Version = 16.20.0-beta.14
+
+[Plugin "js"]
+Target = //plugins:js
 
 [PluginDefinition]
 name = please_openapi
