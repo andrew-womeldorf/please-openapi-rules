@@ -5,7 +5,7 @@ Version = 16.20.0-beta.14
 Target = //plugins:js
 
 [PluginDefinition]
-name = please_openapi
+name = openapi
 
 [PluginConfig "generator_tool"]
 ConfigKey = GeneratorTool
