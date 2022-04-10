@@ -40,7 +40,7 @@ def openapi_generate(name: str, srcs: list, spec: str, generator: str, config: s
         ],
         output_dirs = output_dirs,
         tools = {
-            "generator": CONFIG.PLEASE_OPENAPI.GENERATOR_TOOL,
+            "generator": CONFIG.OPENAPI.GENERATOR_TOOL,
         },
         labels = labels + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,
@@ -66,7 +66,7 @@ def openapi_bundle(name: str, srcs: list, entrypoint: str, out: str="openapi.yam
         srcs = srcs,
         outs = [out],
         cmd = f"$TOOL bundle $(location {entrypoint}) {flags} --output $OUT",
-        tools = ["//third_party/js:openapi-cli"],
+        tools = [CONFIG.OPENAPI.OPENAPI_TOOL],
         labels = labels + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,
     )
@@ -131,8 +131,8 @@ def openapi_lint(name: str, srcs: list, entrypoint: str, linters: str|list|dict=
         cmd = cmd,
         outs = [out],
         tools = {
-            "redocly": "//third_party/js:openapi-cli",
-            "spectral": "//third_party/js:spectral-cli",
+            "redocly": CONFIG.OPENAPI.OPENAPI_TOOL,
+            "spectral": CONFIG.OPENAPI.SPECTRAL_TOOL,
         },
         binary = True,
         labels = labels + _DEFAULT_OPENAPI_LABELS,
@@ -162,7 +162,7 @@ def openapi_preview(name: str, srcs: list, entrypoint: str, out: str="preview.sh
             'echo "#!/usr/bin/env bash" > $OUT',
             f'echo "$TOOL preview-docs $(location {entrypoint} {flags})" >> $OUT',
         ],
-        tools = ["//third_party/js:openapi-cli"],
+        tools = [CONFIG.OPENAPI.OPENAPI_TOOL],
         binary = True,
         labels = labels + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,
@@ -188,7 +188,7 @@ def openapi_docs(name: str, srcs: list, entrypoint: str, out: str="openapi.html"
         srcs = srcs,
         outs = [out],
         cmd = f"$TOOL bundle $(location {entrypoint} {flags}) --output $OUT",
-        tools = ["//third_party/js:redoc-cli"],
+        tools = [CONFIG.OPENAPI.REDOC_TOOL],
         labels = labels + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,
     )
