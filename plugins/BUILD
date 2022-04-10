@@ -2,6 +2,5 @@ plugin_repo(
     name = "js",
     owner = "andrew-womeldorf",
     plugin = "please-js",
-    revision = "3a43f59bd19583e2cffe2a32e42b10a4e053d2b2",
-    #revision = "v0.0.2",
+    revision = "8ad7aae7edec811c3ab02916ef03b690d78c51ec",
 )
