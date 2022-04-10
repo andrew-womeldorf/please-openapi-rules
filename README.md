@@ -11,11 +11,23 @@ Follow the example set by projects in
 
 Include this plugin in your project:
 
+```
+; .plzconfig
+[Plugin "openapi"]
+Target = //plugins:openapi
+
+; Note: I don't think you actually need to define the js target in
+; plugins/BUILD, but you need to define the plugin here with a Target argument.
+[Plugin "js"]
+Target = //plugins:js
+```
+
 ```python
-# BUILD
+# plugins/BUILD
 plugin_repo(
-    name = "please-openapi",
+    name = "openapi",
     owner = "andrew-womeldorf",
+    plugin = "please-openapi",
     revision = "<Some git tag, commit, or other reference>",
 )
 ```
@@ -24,7 +36,7 @@ Use it in a `BUILD` file:
 
 ```python
 # some_dir/BUILD
-subinclude("///please-openapi//build_defs:openapi")
+subinclude("///openapi//build_defs:openapi")
 
 filegroup(
     name = "spec",
