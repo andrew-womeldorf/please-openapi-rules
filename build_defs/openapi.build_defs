@@ -18,13 +18,13 @@ def openapi_generate(name: str, spec: str, generator: str, config: str=None, ext
     """
 
     flags = [
-        f"--input-spec $(out_location {spec})",
+        f"--input-spec $(location {spec})",
         f"--generator-name {generator}",
         f"--output _out",
     ]
 
     if config:
-        flags += [f"--config $(out_location {config})"]
+        flags += [f"--config $(location {config})"]
 
     flags = ' '.join(flags + extra_flags)
 
