@@ -35,6 +35,7 @@ def openapi_generate(name: str, spec: str, generator: str, config: str=None, ext
     return genrule(
         name = name,
         srcs = [spec, config],
+        deps = deps,
         cmd = [
             f"java -jar $TOOLS_GENERATOR generate {flags}"
         ],
