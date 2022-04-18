@@ -2,79 +2,21 @@ subinclude("///js//build_defs:js")
 package(default_visibility = ["PUBLIC"])
 
 yarn_binary(
-    name = "dredd-bin",
-    bin_name = "dredd",
-    package = ":dredd",
-)
-
-yarn_binary(
     name = "openapi-cli",
     bin_name = "openapi",
     package = ":@redocly--openapi-cli",
 )
 
 yarn_binary(
-    name = "redoc-cli",
+    name = "redoc-cli-bin",
     bin_name = "redoc-cli",
-    package = ":redoc-cli-lib",
+    package = ":redoc-cli",
 )
 
 yarn_binary(
     name = "spectral-cli",
     bin_name = "spectral",
     package = ":@stoplight--spectral-cli",
-)
-
-yarn_library(
-    name = "@apielements--apib-parser",
-    package_name = "apib-parser",
-    scope = "@apielements",
-    version = "0.20.1",
-    deps = [
-        ":deckardcain",
-        ":drafter.js",
-        ":protagonist",
-    ],
-)
-
-yarn_library(
-    name = "@apielements--core",
-    package_name = "core",
-    scope = "@apielements",
-    version = "0.2.1",
-    deps = [
-        ":api-elements",
-    ],
-)
-
-yarn_library(
-    name = "@apielements--openapi2-parser",
-    package_name = "openapi2-parser",
-    scope = "@apielements",
-    version = "0.32.4",
-    deps = [
-        ":content-type",
-        ":js-yaml",
-        ":json-schema-faker",
-        ":lodash",
-        ":media-typer",
-        ":swagger-parser",
-        ":yaml-js",
-        ":z-schema",
-    ],
-)
-
-yarn_library(
-    name = "@apielements--openapi3-parser",
-    package_name = "openapi3-parser",
-    scope = "@apielements",
-    version = "0.16.0",
-    deps = [
-        ":content-type",
-        ":media-typer",
-        ":ramda",
-        ":yaml-js",
-    ],
 )
 
 yarn_library(
@@ -862,15 +804,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "ansi-escapes",
-    package_name = "ansi-escapes",
-    version = "4.3.2",
-    deps = [
-        ":type-fest",
-    ],
-)
-
-yarn_library(
     name = "ansi-regex",
     package_name = "ansi-regex",
     version = "5.0.1",
@@ -896,22 +829,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "api-blueprint-http-formatter",
-    package_name = "api-blueprint-http-formatter",
-    version = "0.0.1",
-)
-
-yarn_library(
-    name = "api-elements",
-    package_name = "api-elements",
-    version = "0.3.2",
-    deps = [
-        ":minim",
-        ":ramda",
-    ],
-)
-
-yarn_library(
     name = "argparse",
     package_name = "argparse",
     version = "2.0.1",
@@ -923,15 +840,6 @@ yarn_library(
     version = "1.0.55",
     deps = [
         ":printable-characters",
-    ],
-)
-
-yarn_library(
-    name = "asn1",
-    package_name = "asn1",
-    version = "0.2.6",
-    deps = [
-        ":safer-buffer",
     ],
 )
 
@@ -968,18 +876,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "assert-plus",
-    package_name = "assert-plus",
-    version = "1.0.0",
-)
-
-yarn_library(
-    name = "assertion-error",
-    package_name = "assertion-error",
-    version = "1.1.0",
-)
-
-yarn_library(
     name = "ast-types",
     package_name = "ast-types",
     version = "0.14.2",
@@ -998,24 +894,6 @@ yarn_library(
     name = "async",
     package_name = "async",
     version = "3.2.0",
-)
-
-yarn_library(
-    name = "asynckit",
-    package_name = "asynckit",
-    version = "0.4.0",
-)
-
-yarn_library(
-    name = "aws-sign2",
-    package_name = "aws-sign2",
-    version = "0.7.0",
-)
-
-yarn_library(
-    name = "aws4",
-    package_name = "aws4",
-    version = "1.11.0",
 )
 
 yarn_library(
@@ -1047,15 +925,6 @@ yarn_library(
     name = "base64-js",
     package_name = "base64-js",
     version = "1.5.1",
-)
-
-yarn_library(
-    name = "bcrypt-pbkdf",
-    package_name = "bcrypt-pbkdf",
-    version = "1.0.2",
-    deps = [
-        ":tweetnacl",
-    ],
 )
 
 yarn_library(
@@ -1186,12 +1055,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "buffer-from",
-    package_name = "buffer-from",
-    version = "1.1.2",
-)
-
-yarn_library(
     name = "buffer-xor",
     package_name = "buffer-xor",
     version = "1.0.3",
@@ -1216,16 +1079,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "call-bind",
-    package_name = "call-bind",
-    version = "1.0.2",
-    deps = [
-        ":function-bind",
-        ":get-intrinsic",
-    ],
-)
-
-yarn_library(
     name = "call-me-maybe",
     package_name = "call-me-maybe",
     version = "1.0.1",
@@ -1238,26 +1091,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "caseless",
-    package_name = "caseless",
-    version = "0.12.0",
-)
-
-yarn_library(
-    name = "chai",
-    package_name = "chai",
-    version = "4.2.0",
-    deps = [
-        ":assertion-error",
-        ":check-error",
-        ":deep-eql",
-        ":get-func-name",
-        ":pathval",
-        ":type-detect",
-    ],
-)
-
-yarn_library(
     name = "chalk",
     package_name = "chalk",
     version = "4.1.2",
@@ -1265,18 +1098,6 @@ yarn_library(
         ":ansi-styles",
         ":supports-color",
     ],
-)
-
-yarn_library(
-    name = "chardet",
-    package_name = "chardet",
-    version = "0.7.0",
-)
-
-yarn_library(
-    name = "check-error",
-    package_name = "check-error",
-    version = "1.0.2",
 )
 
 yarn_library(
@@ -1312,21 +1133,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "cli-cursor",
-    package_name = "cli-cursor",
-    version = "3.1.0",
-    deps = [
-        ":restore-cursor",
-    ],
-)
-
-yarn_library(
-    name = "cli-width",
-    package_name = "cli-width",
-    version = "2.2.1",
-)
-
-yarn_library(
     name = "cliui",
     package_name = "cliui",
     version = "7.0.4",
@@ -1335,12 +1141,6 @@ yarn_library(
         ":strip-ansi",
         ":wrap-ansi",
     ],
-)
-
-yarn_library(
-    name = "clone",
-    package_name = "clone",
-    version = "2.1.2",
 )
 
 yarn_library(
@@ -1371,27 +1171,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "colors",
-    package_name = "colors",
-    version = "1.0.3",
-)
-
-yarn_library(
-    name = "combined-stream",
-    package_name = "combined-stream",
-    version = "1.0.8",
-    deps = [
-        ":delayed-stream",
-    ],
-)
-
-yarn_library(
-    name = "commander",
-    package_name = "commander",
-    version = "3.0.2",
-)
-
-yarn_library(
     name = "commondir",
     package_name = "commondir",
     version = "1.0.1",
@@ -1404,18 +1183,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "concat-stream",
-    package_name = "concat-stream",
-    version = "1.6.2",
-    deps = [
-        ":buffer-from",
-        ":inherits",
-        ":readable-stream",
-        ":typedarray",
-    ],
-)
-
-yarn_library(
     name = "console-browserify",
     package_name = "console-browserify",
     version = "1.2.0",
@@ -1425,18 +1192,6 @@ yarn_library(
     name = "constants-browserify",
     package_name = "constants-browserify",
     version = "1.0.0",
-)
-
-yarn_library(
-    name = "content-type",
-    package_name = "content-type",
-    version = "1.0.4",
-)
-
-yarn_library(
-    name = "core-util-is",
-    package_name = "core-util-is",
-    version = "1.0.3",
 )
 
 yarn_library(
@@ -1477,17 +1232,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "cross-spawn",
-    package_name = "cross-spawn",
-    version = "7.0.3",
-    deps = [
-        ":path-key",
-        ":shebang-command",
-        ":which",
-    ],
-)
-
-yarn_library(
     name = "crypto-browserify",
     package_name = "crypto-browserify",
     version = "3.12.0",
@@ -1524,32 +1268,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "curl-trace-parser",
-    package_name = "curl-trace-parser",
-    version = "0.0.10",
-    deps = [
-        ":api-blueprint-http-formatter",
-        ":commander",
-        ":http-string-parser",
-    ],
-)
-
-yarn_library(
-    name = "cycle",
-    package_name = "cycle",
-    version = "1.0.3",
-)
-
-yarn_library(
-    name = "dashdash",
-    package_name = "dashdash",
-    version = "1.14.1",
-    deps = [
-        ":assert-plus",
-    ],
-)
-
-yarn_library(
     name = "data-uri-to-buffer",
     package_name = "data-uri-to-buffer",
     version = "3.0.1",
@@ -1565,54 +1283,15 @@ yarn_library(
 )
 
 yarn_library(
-    name = "deckardcain",
-    package_name = "deckardcain",
-    version = "1.0.0",
-)
-
-yarn_library(
     name = "decko",
     package_name = "decko",
     version = "1.2.0",
 )
 
 yarn_library(
-    name = "deep-eql",
-    package_name = "deep-eql",
-    version = "3.0.1",
-    deps = [
-        ":type-detect",
-    ],
-)
-
-yarn_library(
-    name = "deep-equal",
-    package_name = "deep-equal",
-    version = "1.1.1",
-    deps = [
-        ":is-arguments",
-        ":is-date-object",
-        ":is-regex",
-        ":object-is",
-        ":object-keys",
-        ":regexp.prototype.flags",
-    ],
-)
-
-yarn_library(
     name = "deep-is",
     package_name = "deep-is",
     version = "0.1.4",
-)
-
-yarn_library(
-    name = "define-properties",
-    package_name = "define-properties",
-    version = "1.1.4",
-    deps = [
-        ":has-property-descriptors",
-        ":object-keys",
-    ],
 )
 
 yarn_library(
@@ -1625,12 +1304,6 @@ yarn_library(
         ":esprima",
         ":vm2",
     ],
-)
-
-yarn_library(
-    name = "delayed-stream",
-    package_name = "delayed-stream",
-    version = "1.0.0",
 )
 
 yarn_library(
@@ -1679,72 +1352,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "drafter.js",
-    package_name = "drafter.js",
-    version = "3.2.0",
-)
-
-yarn_library(
-    name = "drange",
-    package_name = "drange",
-    version = "1.1.1",
-)
-
-yarn_library(
-    name = "dredd",
-    package_name = "dredd",
-    version = "14.1.0",
-    deps = [
-        ":async",
-        ":caseless",
-        ":chai",
-        ":clone",
-        ":cross-spawn",
-        ":dredd-transactions",
-        ":gavel",
-        ":glob",
-        ":html",
-        ":htmlencode",
-        ":inquirer",
-        ":js-yaml",
-        ":make-dir",
-        ":markdown-it",
-        ":optimist",
-        ":proxyquire",
-        ":ramda",
-        ":request",
-        ":spawn-args",
-        ":untildify",
-        ":uuid",
-        ":which",
-        ":winston",
-    ],
-)
-
-yarn_library(
-    name = "dredd-transactions",
-    package_name = "dredd-transactions",
-    version = "10.1.0",
-    deps = [
-        ":@apielements--apib-parser",
-        ":@apielements--core",
-        ":@apielements--openapi2-parser",
-        ":@apielements--openapi3-parser",
-        ":uri-template",
-    ],
-)
-
-yarn_library(
-    name = "ecc-jsbn",
-    package_name = "ecc-jsbn",
-    version = "0.1.2",
-    deps = [
-        ":jsbn",
-        ":safer-buffer",
-    ],
-)
-
-yarn_library(
     name = "elliptic",
     package_name = "elliptic",
     version = "6.5.4",
@@ -1766,12 +1373,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "entities",
-    package_name = "entities",
-    version = "2.0.3",
-)
-
-yarn_library(
     name = "eol",
     package_name = "eol",
     version = "0.9.1",
@@ -1787,12 +1388,6 @@ yarn_library(
     name = "escalade",
     package_name = "escalade",
     version = "3.1.1",
-)
-
-yarn_library(
-    name = "escape-string-regexp",
-    package_name = "escape-string-regexp",
-    version = "1.0.5",
 )
 
 yarn_library(
@@ -1867,35 +1462,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "extend",
-    package_name = "extend",
-    version = "3.0.2",
-)
-
-yarn_library(
-    name = "external-editor",
-    package_name = "external-editor",
-    version = "3.1.0",
-    deps = [
-        ":chardet",
-        ":iconv-lite",
-        ":tmp",
-    ],
-)
-
-yarn_library(
-    name = "extsprintf",
-    package_name = "extsprintf",
-    version = "1.4.1",
-)
-
-yarn_library(
-    name = "eyes",
-    package_name = "eyes",
-    version = "0.1.8",
-)
-
-yarn_library(
     name = "fast-deep-equal",
     package_name = "fast-deep-equal",
     version = "3.1.3",
@@ -1942,28 +1508,9 @@ yarn_library(
 )
 
 yarn_library(
-    name = "figures",
-    package_name = "figures",
-    version = "3.2.0",
-    deps = [
-        ":escape-string-regexp",
-    ],
-)
-
-yarn_library(
     name = "file-uri-to-path",
     package_name = "file-uri-to-path",
     version = "2.0.0",
-)
-
-yarn_library(
-    name = "fill-keys",
-    package_name = "fill-keys",
-    version = "1.0.2",
-    deps = [
-        ":is-object",
-        ":merge-descriptors",
-    ],
 )
 
 yarn_library(
@@ -1979,23 +1526,6 @@ yarn_library(
     name = "foreach",
     package_name = "foreach",
     version = "2.0.5",
-)
-
-yarn_library(
-    name = "forever-agent",
-    package_name = "forever-agent",
-    version = "0.6.1",
-)
-
-yarn_library(
-    name = "form-data",
-    package_name = "form-data",
-    version = "2.3.3",
-    deps = [
-        ":asynckit",
-        ":combined-stream",
-        ":mime-types",
-    ],
 )
 
 yarn_library(
@@ -2038,52 +1568,9 @@ yarn_library(
 )
 
 yarn_library(
-    name = "functions-have-names",
-    package_name = "functions-have-names",
-    version = "1.2.2",
-)
-
-yarn_library(
-    name = "gavel",
-    package_name = "gavel",
-    version = "9.1.5",
-    deps = [
-        ":ajv",
-        ":caseless",
-        ":clone",
-        ":commander",
-        ":content-type",
-        ":curl-trace-parser",
-        ":deep-equal",
-        ":http-string-parser",
-        ":json-pointer",
-        ":media-typer",
-        ":tv4",
-        ":url",
-    ],
-)
-
-yarn_library(
     name = "get-caller-file",
     package_name = "get-caller-file",
     version = "2.0.5",
-)
-
-yarn_library(
-    name = "get-func-name",
-    package_name = "get-func-name",
-    version = "2.0.0",
-)
-
-yarn_library(
-    name = "get-intrinsic",
-    package_name = "get-intrinsic",
-    version = "1.1.1",
-    deps = [
-        ":function-bind",
-        ":has",
-        ":has-symbols",
-    ],
 )
 
 yarn_library(
@@ -2107,15 +1594,6 @@ yarn_library(
         ":file-uri-to-path",
         ":fs-extra",
         ":ftp",
-    ],
-)
-
-yarn_library(
-    name = "getpass",
-    package_name = "getpass",
-    version = "0.1.7",
-    deps = [
-        ":assert-plus",
     ],
 )
 
@@ -2177,22 +1655,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "har-schema",
-    package_name = "har-schema",
-    version = "2.0.0",
-)
-
-yarn_library(
-    name = "har-validator",
-    package_name = "har-validator",
-    version = "5.1.5",
-    deps = [
-        ":ajv",
-        ":har-schema",
-    ],
-)
-
-yarn_library(
     name = "has",
     package_name = "has",
     version = "1.0.3",
@@ -2205,30 +1667,6 @@ yarn_library(
     name = "has-flag",
     package_name = "has-flag",
     version = "4.0.0",
-)
-
-yarn_library(
-    name = "has-property-descriptors",
-    package_name = "has-property-descriptors",
-    version = "1.0.0",
-    deps = [
-        ":get-intrinsic",
-    ],
-)
-
-yarn_library(
-    name = "has-symbols",
-    package_name = "has-symbols",
-    version = "1.0.3",
-)
-
-yarn_library(
-    name = "has-tostringtag",
-    package_name = "has-tostringtag",
-    version = "1.0.0",
-    deps = [
-        ":has-symbols",
-    ],
 )
 
 yarn_library(
@@ -2273,21 +1711,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "html",
-    package_name = "html",
-    version = "1.0.0",
-    deps = [
-        ":concat-stream",
-    ],
-)
-
-yarn_library(
-    name = "htmlencode",
-    package_name = "htmlencode",
-    version = "0.0.4",
-)
-
-yarn_library(
     name = "http-errors",
     package_name = "http-errors",
     version = "2.0.0",
@@ -2309,23 +1732,6 @@ yarn_library(
         ":agent-base",
         ":debug",
     ],
-)
-
-yarn_library(
-    name = "http-signature",
-    package_name = "http-signature",
-    version = "1.2.0",
-    deps = [
-        ":assert-plus",
-        ":jsprim",
-        ":sshpk",
-    ],
-)
-
-yarn_library(
-    name = "http-string-parser",
-    package_name = "http-string-parser",
-    version = "0.0.6",
 )
 
 yarn_library(
@@ -2388,40 +1794,9 @@ yarn_library(
 )
 
 yarn_library(
-    name = "inquirer",
-    package_name = "inquirer",
-    version = "7.1.0",
-    deps = [
-        ":ansi-escapes",
-        ":chalk",
-        ":cli-cursor",
-        ":cli-width",
-        ":external-editor",
-        ":figures",
-        ":lodash",
-        ":mute-stream",
-        ":run-async",
-        ":rxjs",
-        ":string-width",
-        ":strip-ansi",
-        ":through",
-    ],
-)
-
-yarn_library(
     name = "ip",
     package_name = "ip",
     version = "1.1.5",
-)
-
-yarn_library(
-    name = "is-arguments",
-    package_name = "is-arguments",
-    version = "1.1.1",
-    deps = [
-        ":call-bind",
-        ":has-tostringtag",
-    ],
 )
 
 yarn_library(
@@ -2439,15 +1814,6 @@ yarn_library(
     version = "2.8.1",
     deps = [
         ":has",
-    ],
-)
-
-yarn_library(
-    name = "is-date-object",
-    package_name = "is-date-object",
-    version = "1.0.5",
-    deps = [
-        ":has-tostringtag",
     ],
 )
 
@@ -2479,12 +1845,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "is-object",
-    package_name = "is-object",
-    version = "1.0.2",
-)
-
-yarn_library(
     name = "is-reference",
     package_name = "is-reference",
     version = "1.2.1",
@@ -2494,37 +1854,9 @@ yarn_library(
 )
 
 yarn_library(
-    name = "is-regex",
-    package_name = "is-regex",
-    version = "1.1.4",
-    deps = [
-        ":call-bind",
-        ":has-tostringtag",
-    ],
-)
-
-yarn_library(
-    name = "is-typedarray",
-    package_name = "is-typedarray",
-    version = "1.0.0",
-)
-
-yarn_library(
     name = "isarray",
     package_name = "isarray",
     version = "2.0.5",
-)
-
-yarn_library(
-    name = "isexe",
-    package_name = "isexe",
-    version = "2.0.0",
-)
-
-yarn_library(
-    name = "isstream",
-    package_name = "isstream",
-    version = "0.1.2",
 )
 
 yarn_library(
@@ -2546,12 +1878,6 @@ yarn_library(
     deps = [
         ":argparse",
     ],
-)
-
-yarn_library(
-    name = "jsbn",
-    package_name = "jsbn",
-    version = "0.1.1",
 )
 
 yarn_library(
@@ -2582,37 +1908,9 @@ yarn_library(
 )
 
 yarn_library(
-    name = "json-schema-faker",
-    package_name = "json-schema-faker",
-    version = "0.5.0-rc23",
-    deps = [
-        ":json-schema-ref-parser",
-        ":jsonpath-plus",
-        ":randexp",
-    ],
-)
-
-yarn_library(
-    name = "json-schema-ref-parser",
-    package_name = "json-schema-ref-parser",
-    version = "7.1.4",
-    deps = [
-        ":call-me-maybe",
-        ":js-yaml",
-        ":ono",
-    ],
-)
-
-yarn_library(
     name = "json-schema-traverse",
     package_name = "json-schema-traverse",
     version = "1.0.0",
-)
-
-yarn_library(
-    name = "json-stringify-safe",
-    package_name = "json-stringify-safe",
-    version = "5.0.1",
 )
 
 yarn_library(
@@ -2643,18 +1941,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "jsprim",
-    package_name = "jsprim",
-    version = "1.4.2",
-    deps = [
-        ":assert-plus",
-        ":extsprintf",
-        ":json-schema",
-        ":verror",
-    ],
-)
-
-yarn_library(
     name = "leven",
     package_name = "leven",
     version = "3.1.0",
@@ -2667,15 +1953,6 @@ yarn_library(
     deps = [
         ":prelude-ls",
         ":type-check",
-    ],
-)
-
-yarn_library(
-    name = "linkify-it",
-    package_name = "linkify-it",
-    version = "2.2.0",
-    deps = [
-        ":uc.micro",
     ],
 )
 
@@ -2743,31 +2020,9 @@ yarn_library(
 )
 
 yarn_library(
-    name = "make-dir",
-    package_name = "make-dir",
-    version = "3.1.0",
-    deps = [
-        ":semver",
-    ],
-)
-
-yarn_library(
     name = "mark.js",
     package_name = "mark.js",
     version = "8.11.1",
-)
-
-yarn_library(
-    name = "markdown-it",
-    package_name = "markdown-it",
-    version = "10.0.0",
-    deps = [
-        ":argparse",
-        ":entities",
-        ":linkify-it",
-        ":mdurl",
-        ":uc.micro",
-    ],
 )
 
 yarn_library(
@@ -2785,24 +2040,6 @@ yarn_library(
         ":inherits",
         ":safe-buffer",
     ],
-)
-
-yarn_library(
-    name = "mdurl",
-    package_name = "mdurl",
-    version = "1.0.1",
-)
-
-yarn_library(
-    name = "media-typer",
-    package_name = "media-typer",
-    version = "1.1.0",
-)
-
-yarn_library(
-    name = "merge-descriptors",
-    package_name = "merge-descriptors",
-    version = "1.0.1",
 )
 
 yarn_library(
@@ -2828,36 +2065,6 @@ yarn_library(
     deps = [
         ":bn.js",
         ":brorand",
-    ],
-)
-
-yarn_library(
-    name = "mime-db",
-    package_name = "mime-db",
-    version = "1.52.0",
-)
-
-yarn_library(
-    name = "mime-types",
-    package_name = "mime-types",
-    version = "2.1.35",
-    deps = [
-        ":mime-db",
-    ],
-)
-
-yarn_library(
-    name = "mimic-fn",
-    package_name = "mimic-fn",
-    version = "2.1.0",
-)
-
-yarn_library(
-    name = "minim",
-    package_name = "minim",
-    version = "0.23.8",
-    deps = [
-        ":lodash",
     ],
 )
 
@@ -2916,27 +2123,9 @@ yarn_library(
 )
 
 yarn_library(
-    name = "module-not-found-error",
-    package_name = "module-not-found-error",
-    version = "1.0.1",
-)
-
-yarn_library(
     name = "ms",
     package_name = "ms",
     version = "2.1.3",
-)
-
-yarn_library(
-    name = "mute-stream",
-    package_name = "mute-stream",
-    version = "0.0.8",
-)
-
-yarn_library(
-    name = "nan",
-    package_name = "nan",
-    version = "2.15.0",
 )
 
 yarn_library(
@@ -3085,31 +2274,9 @@ yarn_library(
 )
 
 yarn_library(
-    name = "oauth-sign",
-    package_name = "oauth-sign",
-    version = "0.9.0",
-)
-
-yarn_library(
     name = "object-assign",
     package_name = "object-assign",
     version = "4.1.1",
-)
-
-yarn_library(
-    name = "object-is",
-    package_name = "object-is",
-    version = "1.1.5",
-    deps = [
-        ":call-bind",
-        ":define-properties",
-    ],
-)
-
-yarn_library(
-    name = "object-keys",
-    package_name = "object-keys",
-    version = "1.1.1",
 )
 
 yarn_library(
@@ -3122,49 +2289,12 @@ yarn_library(
 )
 
 yarn_library(
-    name = "onetime",
-    package_name = "onetime",
-    version = "5.1.2",
-    deps = [
-        ":mimic-fn",
-    ],
-)
-
-yarn_library(
-    name = "ono",
-    package_name = "ono",
-    version = "6.0.1",
-)
-
-yarn_library(
     name = "openapi-sampler",
     package_name = "openapi-sampler",
     version = "1.2.1",
     deps = [
         ":@types--json-schema",
         ":json-pointer",
-    ],
-)
-
-yarn_library(
-    name = "openapi-schemas",
-    package_name = "openapi-schemas",
-    version = "1.0.3",
-)
-
-yarn_library(
-    name = "openapi-types",
-    package_name = "openapi-types",
-    version = "1.3.5",
-)
-
-yarn_library(
-    name = "optimist",
-    package_name = "optimist",
-    version = "0.6.1",
-    deps = [
-        ":minimist",
-        ":wordwrap",
     ],
 )
 
@@ -3186,12 +2316,6 @@ yarn_library(
     name = "os-browserify",
     package_name = "os-browserify",
     version = "0.3.0",
-)
-
-yarn_library(
-    name = "os-tmpdir",
-    package_name = "os-tmpdir",
-    version = "1.0.2",
 )
 
 yarn_library(
@@ -3254,21 +2378,9 @@ yarn_library(
 )
 
 yarn_library(
-    name = "path-key",
-    package_name = "path-key",
-    version = "3.1.1",
-)
-
-yarn_library(
     name = "path-parse",
     package_name = "path-parse",
     version = "1.0.7",
-)
-
-yarn_library(
-    name = "pathval",
-    package_name = "pathval",
-    version = "1.1.1",
 )
 
 yarn_library(
@@ -3285,21 +2397,9 @@ yarn_library(
 )
 
 yarn_library(
-    name = "pct-encode",
-    package_name = "pct-encode",
-    version = "1.0.2",
-)
-
-yarn_library(
     name = "perfect-scrollbar",
     package_name = "perfect-scrollbar",
     version = "1.5.5",
-)
-
-yarn_library(
-    name = "performance-now",
-    package_name = "performance-now",
-    version = "2.1.0",
 )
 
 yarn_library(
@@ -3382,15 +2482,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "protagonist",
-    package_name = "protagonist",
-    version = "2.2.1",
-    deps = [
-        ":nan",
-    ],
-)
-
-yarn_library(
     name = "proxy-agent",
     package_name = "proxy-agent",
     version = "5.0.0",
@@ -3410,23 +2501,6 @@ yarn_library(
     name = "proxy-from-env",
     package_name = "proxy-from-env",
     version = "1.1.0",
-)
-
-yarn_library(
-    name = "proxyquire",
-    package_name = "proxyquire",
-    version = "2.1.3",
-    deps = [
-        ":fill-keys",
-        ":module-not-found-error",
-        ":resolve",
-    ],
-)
-
-yarn_library(
-    name = "psl",
-    package_name = "psl",
-    version = "1.8.0",
 )
 
 yarn_library(
@@ -3450,12 +2524,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "qs",
-    package_name = "qs",
-    version = "6.5.3",
-)
-
-yarn_library(
     name = "querystring",
     package_name = "querystring",
     version = "0.2.0",
@@ -3471,22 +2539,6 @@ yarn_library(
     name = "queue-microtask",
     package_name = "queue-microtask",
     version = "1.2.3",
-)
-
-yarn_library(
-    name = "ramda",
-    package_name = "ramda",
-    version = "0.27.2",
-)
-
-yarn_library(
-    name = "randexp",
-    package_name = "randexp",
-    version = "0.5.3",
-    deps = [
-        ":drange",
-        ":ret",
-    ],
 )
 
 yarn_library(
@@ -3609,7 +2661,7 @@ yarn_library(
 )
 
 yarn_library(
-    name = "redoc-cli-lib",
+    name = "redoc-cli",
     package_name = "redoc-cli",
     version = "0.13.10",
     deps = [
@@ -3637,45 +2689,6 @@ yarn_library(
     name = "regenerator-runtime",
     package_name = "regenerator-runtime",
     version = "0.13.9",
-)
-
-yarn_library(
-    name = "regexp.prototype.flags",
-    package_name = "regexp.prototype.flags",
-    version = "1.4.3",
-    deps = [
-        ":call-bind",
-        ":define-properties",
-        ":functions-have-names",
-    ],
-)
-
-yarn_library(
-    name = "request",
-    package_name = "request",
-    version = "2.88.2",
-    deps = [
-        ":aws-sign2",
-        ":aws4",
-        ":caseless",
-        ":combined-stream",
-        ":extend",
-        ":forever-agent",
-        ":form-data",
-        ":har-validator",
-        ":http-signature",
-        ":is-typedarray",
-        ":isstream",
-        ":json-stringify-safe",
-        ":mime-types",
-        ":oauth-sign",
-        ":performance-now",
-        ":qs",
-        ":safe-buffer",
-        ":tough-cookie",
-        ":tunnel-agent",
-        ":uuid",
-    ],
 )
 
 yarn_library(
@@ -3708,22 +2721,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "restore-cursor",
-    package_name = "restore-cursor",
-    version = "3.1.0",
-    deps = [
-        ":onetime",
-        ":signal-exit",
-    ],
-)
-
-yarn_library(
-    name = "ret",
-    package_name = "ret",
-    version = "0.2.2",
-)
-
-yarn_library(
     name = "reusify",
     package_name = "reusify",
     version = "1.0.4",
@@ -3749,26 +2746,11 @@ yarn_library(
 )
 
 yarn_library(
-    name = "run-async",
-    package_name = "run-async",
-    version = "2.4.1",
-)
-
-yarn_library(
     name = "run-parallel",
     package_name = "run-parallel",
     version = "1.2.0",
     deps = [
         ":queue-microtask",
-    ],
-)
-
-yarn_library(
-    name = "rxjs",
-    package_name = "rxjs",
-    version = "6.6.7",
-    deps = [
-        ":tslib",
     ],
 )
 
@@ -3835,21 +2817,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "shebang-command",
-    package_name = "shebang-command",
-    version = "2.0.0",
-    deps = [
-        ":shebang-regex",
-    ],
-)
-
-yarn_library(
-    name = "shebang-regex",
-    package_name = "shebang-regex",
-    version = "3.0.0",
-)
-
-yarn_library(
     name = "should",
     package_name = "should",
     version = "13.2.3",
@@ -3901,12 +2868,6 @@ yarn_library(
     name = "should-util",
     package_name = "should-util",
     version = "1.0.1",
-)
-
-yarn_library(
-    name = "signal-exit",
-    package_name = "signal-exit",
-    version = "3.0.7",
 )
 
 yarn_library(
@@ -3974,35 +2935,6 @@ yarn_library(
     name = "sourcemap-codec",
     package_name = "sourcemap-codec",
     version = "1.4.8",
-)
-
-yarn_library(
-    name = "spawn-args",
-    package_name = "spawn-args",
-    version = "0.2.0",
-)
-
-yarn_library(
-    name = "sshpk",
-    package_name = "sshpk",
-    version = "1.17.0",
-    deps = [
-        ":asn1",
-        ":assert-plus",
-        ":bcrypt-pbkdf",
-        ":dashdash",
-        ":ecc-jsbn",
-        ":getpass",
-        ":jsbn",
-        ":safer-buffer",
-        ":tweetnacl",
-    ],
-)
-
-yarn_library(
-    name = "stack-trace",
-    package_name = "stack-trace",
-    version = "0.0.10",
 )
 
 yarn_library(
@@ -4119,27 +3051,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "swagger-methods",
-    package_name = "swagger-methods",
-    version = "2.0.2",
-)
-
-yarn_library(
-    name = "swagger-parser",
-    package_name = "swagger-parser",
-    version = "8.0.4",
-    deps = [
-        ":call-me-maybe",
-        ":json-schema-ref-parser",
-        ":ono",
-        ":openapi-schemas",
-        ":openapi-types",
-        ":swagger-methods",
-        ":z-schema",
-    ],
-)
-
-yarn_library(
     name = "swagger2openapi",
     package_name = "swagger2openapi",
     version = "7.0.8",
@@ -4165,26 +3076,11 @@ yarn_library(
 )
 
 yarn_library(
-    name = "through",
-    package_name = "through",
-    version = "2.3.8",
-)
-
-yarn_library(
     name = "timers-browserify",
     package_name = "timers-browserify",
     version = "2.0.12",
     deps = [
         ":setimmediate",
-    ],
-)
-
-yarn_library(
-    name = "tmp",
-    package_name = "tmp",
-    version = "0.0.33",
-    deps = [
-        ":os-tmpdir",
     ],
 )
 
@@ -4216,16 +3112,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "tough-cookie",
-    package_name = "tough-cookie",
-    version = "2.5.0",
-    deps = [
-        ":psl",
-        ":punycode",
-    ],
-)
-
-yarn_library(
     name = "tr46",
     package_name = "tr46",
     version = "0.0.3",
@@ -4244,57 +3130,12 @@ yarn_library(
 )
 
 yarn_library(
-    name = "tunnel-agent",
-    package_name = "tunnel-agent",
-    version = "0.6.0",
-    deps = [
-        ":safe-buffer",
-    ],
-)
-
-yarn_library(
-    name = "tv4",
-    package_name = "tv4",
-    version = "1.3.0",
-)
-
-yarn_library(
-    name = "tweetnacl",
-    package_name = "tweetnacl",
-    version = "0.14.5",
-)
-
-yarn_library(
     name = "type-check",
     package_name = "type-check",
     version = "0.3.2",
     deps = [
         ":prelude-ls",
     ],
-)
-
-yarn_library(
-    name = "type-detect",
-    package_name = "type-detect",
-    version = "4.0.8",
-)
-
-yarn_library(
-    name = "type-fest",
-    package_name = "type-fest",
-    version = "0.21.3",
-)
-
-yarn_library(
-    name = "typedarray",
-    package_name = "typedarray",
-    version = "0.0.6",
-)
-
-yarn_library(
-    name = "uc.micro",
-    package_name = "uc.micro",
-    version = "1.0.6",
 )
 
 yarn_library(
@@ -4316,26 +3157,11 @@ yarn_library(
 )
 
 yarn_library(
-    name = "untildify",
-    package_name = "untildify",
-    version = "4.0.0",
-)
-
-yarn_library(
     name = "uri-js",
     package_name = "uri-js",
     version = "4.4.1",
     deps = [
         ":punycode",
-    ],
-)
-
-yarn_library(
-    name = "uri-template",
-    package_name = "uri-template",
-    version = "1.0.1",
-    deps = [
-        ":pct-encode",
     ],
 )
 
@@ -4383,34 +3209,11 @@ yarn_library(
 )
 
 yarn_library(
-    name = "uuid",
-    package_name = "uuid",
-    version = "7.0.3",
-)
-
-yarn_library(
     name = "validate-npm-package-name",
     package_name = "validate-npm-package-name",
     version = "3.0.0",
     deps = [
         ":builtins",
-    ],
-)
-
-yarn_library(
-    name = "validator",
-    package_name = "validator",
-    version = "13.7.0",
-)
-
-yarn_library(
-    name = "verror",
-    package_name = "verror",
-    version = "1.10.0",
-    deps = [
-        ":assert-plus",
-        ":core-util-is",
-        ":extsprintf",
     ],
 )
 
@@ -4443,29 +3246,6 @@ yarn_library(
     deps = [
         ":tr46",
         ":webidl-conversions",
-    ],
-)
-
-yarn_library(
-    name = "which",
-    package_name = "which",
-    version = "2.0.2",
-    deps = [
-        ":isexe",
-    ],
-)
-
-yarn_library(
-    name = "winston",
-    package_name = "winston",
-    version = "2.4.0",
-    deps = [
-        ":async",
-        ":colors",
-        ":cycle",
-        ":eyes",
-        ":isstream",
-        ":stack-trace",
     ],
 )
 
@@ -4547,12 +3327,6 @@ yarn_library(
 )
 
 yarn_library(
-    name = "yaml-js",
-    package_name = "yaml-js",
-    version = "0.2.3",
-)
-
-yarn_library(
     name = "yargs",
     package_name = "yargs",
     version = "17.4.0",
@@ -4571,16 +3345,4 @@ yarn_library(
     name = "yargs-parser",
     package_name = "yargs-parser",
     version = "21.0.1",
-)
-
-yarn_library(
-    name = "z-schema",
-    package_name = "z-schema",
-    version = "4.2.4",
-    deps = [
-        ":lodash.get",
-        ":lodash.isequal",
-        ":validator",
-        ":commander",
-    ],
 )

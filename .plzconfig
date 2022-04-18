@@ -17,8 +17,12 @@ DefaultValue = //third_party/js:openapi-cli
 
 [PluginConfig "redoc_tool"]
 ConfigKey = RedocTool
-DefaultValue = //third_party/js:redoc-cli
+DefaultValue = //third_party/js:redoc-cli-bin
 
 [PluginConfig "spectral_tool"]
 ConfigKey = SpectralTool
 DefaultValue = //third_party/js:spectral-cli
+
+[PluginConfig "validate_tool"]
+ConfigKey = ValidateTool
+DefaultValue = //third_party/js:dredd-bin
