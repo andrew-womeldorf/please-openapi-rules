@@ -3,28 +3,27 @@
 
 _DEFAULT_OPENAPI_LABELS = ["openapi"]
 
-def openapi_generate(name: str, srcs: list, spec: str, generator: str, config: str=None, extra_flags: list=[], out_dirs: list=None, labels:list&features&tags=[], visibility: list=["PUBLIC"]):
+def openapi_generate(name: str, spec: str, generator: str, config: str=None, extra_flags: list=[], out_dirs: list=None, labels:list&features&tags=[], visibility: list=["PUBLIC"]):
     """Generate code to various langauges from an OpenAPI Spec.
 
     Args:
       name (str): Name of the rule.
-      srcs (list): Input spec file.
-      spec (str): Name of the file that serves as the entrypoint.
+      spec (str): Target whose output is the OpenAPI spec.
       generator (str): Name of the generator to use.
-      config (str): Name of the config file to use.
+      config (str): Target whose output is a config file.
       extra_flags (list): Additional flags to pass to the tool.
       out_dir (str): Use if the generated output you need is in a subdirectory.
       visibility (list): Visibility specification for the rule.
     """
 
     flags = [
-        f"--input-spec $(location {spec})",
+        f"--input-spec $(out_location {spec})",
         f"--generator-name {generator}",
         f"--output _out",
     ]
 
     if config:
-        flags += [f"--config $(location {config})"]
+        flags += [f"--config $(out_location {config})"]
 
     flags = ' '.join(flags + extra_flags)
 
@@ -34,7 +33,7 @@ def openapi_generate(name: str, srcs: list, spec: str, generator: str, config: s
 
     return genrule(
         name = name,
-        srcs = srcs,
+        srcs = [spec, config],
         cmd = [
             f"java -jar $TOOLS_GENERATOR generate {flags}"
         ],
@@ -42,7 +41,7 @@ def openapi_generate(name: str, srcs: list, spec: str, generator: str, config: s
         tools = {
             "generator": CONFIG.OPENAPI.GENERATOR_TOOL,
         },
-        labels = labels + _DEFAULT_OPENAPI_LABELS,
+        labels = labels + ["codegen"] + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,
     )
 
