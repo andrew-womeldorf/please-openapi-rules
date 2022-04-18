@@ -79,6 +79,8 @@ openapi_generate(
 )
 ```
 
+Note that `openapi_generator` is labeled for use with `plz generate`.
+
 ## Configuration
 
 This plugin can be configured via the plugins section as follows:

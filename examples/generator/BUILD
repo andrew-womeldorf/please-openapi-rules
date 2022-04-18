@@ -1,23 +1,27 @@
 subinclude("//build_defs:openapi")
 
+filegroup(
+    name = "petstore#config",
+    srcs = ["go-server.json"],
+)
+
+filegroup(
+    name = "petstore#spec",
+    srcs = ["petstore.yaml"],
+)
+
 openapi_generate(
     name = "petstore#gen",
-    srcs = [
-        "go-server.json",
-        "petstore.yaml",
-    ],
-    spec = "petstore.yaml",
+    spec = ":petstore#spec",
+    config = ":petstore#config",
     generator = "go-server",
-    config = "go-server.json",
     out_dirs = ["go"],
 )
 
 go_library(
     name = "generator",
     srcs = [":petstore#gen"],
-    deps = [
-            "//third_party/go:mux",
-    ],
+    deps = ["//third_party/go:mux"],
 )
 
 go_binary(
