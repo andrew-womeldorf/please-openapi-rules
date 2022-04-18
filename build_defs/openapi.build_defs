@@ -3,7 +3,7 @@
 
 _DEFAULT_OPENAPI_LABELS = ["openapi"]
 
-def openapi_generate(name: str, spec: str, generator: str, config: str=None, extra_flags: list=[], out_dirs: list=None, labels:list&features&tags=[], visibility: list=["PUBLIC"]):
+def openapi_generate(name: str, spec: str, generator: str, config: str=None, extra_flags: list=[], deps: list=[], out_dirs: list=None, labels:list&features&tags=[], visibility: list=["PUBLIC"]):
     """Generate code to various langauges from an OpenAPI Spec.
 
     Args:
@@ -12,6 +12,7 @@ def openapi_generate(name: str, spec: str, generator: str, config: str=None, ext
       generator (str): Name of the generator to use.
       config (str): Target whose output is a config file.
       extra_flags (list): Additional flags to pass to the tool.
+      deps (list): Additional targets to include during build.
       out_dir (str): Use if the generated output you need is in a subdirectory.
       visibility (list): Visibility specification for the rule.
     """
