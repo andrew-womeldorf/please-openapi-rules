@@ -1,6 +1,9 @@
 [please]
 Version = 16.20.0-beta.14
 
+[python]
+ModuleDir = third_party.python
+
 [Plugin "js"]
 Target = //plugins:js
 
@@ -25,4 +28,4 @@ DefaultValue = //third_party/js:spectral-cli
 
 [PluginConfig "validate_tool"]
 ConfigKey = ValidateTool
-DefaultValue = //third_party/js:dredd-bin
+DefaultValue = //tools:validate
