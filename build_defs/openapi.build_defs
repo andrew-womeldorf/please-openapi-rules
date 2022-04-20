@@ -161,7 +161,7 @@ def openapi_preview(name: str, srcs: list, entrypoint: str, out: str="preview.sh
         outs = [out],
         cmd = [
             'echo "#!/usr/bin/env bash" > $OUT',
-            f'echo "$TOOL preview-docs $(location {entrypoint} {flags})" >> $OUT',
+            f'echo "$TOOL preview-docs $(location {entrypoint}) {flags}" >> $OUT',
         ],
         tools = [CONFIG.OPENAPI.OPENAPI_TOOL],
         binary = True,
@@ -188,8 +188,41 @@ def openapi_docs(name: str, srcs: list, entrypoint: str, out: str="openapi.html"
         name = name,
         srcs = srcs,
         outs = [out],
-        cmd = f"$TOOL bundle $(location {entrypoint} {flags}) --output $OUT",
+        cmd = f"$TOOL bundle $(location {entrypoint}) {flags} --output $OUT",
         tools = [CONFIG.OPENAPI.REDOC_TOOL],
+        labels = labels + _DEFAULT_OPENAPI_LABELS,
+        visibility = visibility,
+    )
+
+def openapi_test(name: str, spec_url: str, webserver: str, extra_flags: list=[], deps: list=[], data: list|dict=None, sandbox: bool=None, labels:list&features&tags=[], visibility: list=["PUBLIC"]):
+    """Test an openapi spec against a running server 
+
+    Args:
+      name (str): Name of the rule.
+      spec_url (str): URL of the tested server.
+      webserver (str): Target of the webserver
+      extra_flags (list): Additional flags to pass to the tool.
+      deps (list): Additional targets to include during build.
+      data (list | dict): Runtime data files for the test.
+      sandbox (bool): If True, the test is run within a sandbox that restricts some cgroups
+                      including networking, process, IPC, etc. Only has an effect on Linux.
+                      If this is on by default then tests can opt out by setting this to False.
+      visibility (list): Visibility specification for the rule.
+    """
+
+    flags = ' '.join(["--junit-xml", "$RESULTS_FILE"] + extra_flags)
+    data = {"webserver": webserver}
+
+    return gentest(
+        name = name,
+        deps = deps,
+        data = data,
+        test_cmd = [
+            "($DATA_WEBSERVER &)",
+            f"$TOOL run {spec_url} {flags}",
+        ],
+        sandbox = sandbox,
+        test_tools = CONFIG.OPENAPI.VALIDATE_TOOL,
         labels = labels + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,
     )

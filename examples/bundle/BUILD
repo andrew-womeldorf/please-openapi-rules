@@ -13,9 +13,12 @@ openapi_bundle(
     srcs = [
         ":spec",
     ],
-    extra_flags = ["--format", "json"],
     out = "openapi.json",
     entrypoint = "petstore.yaml",
+    extra_flags = [
+        "--format",
+        "json",
+    ],
 )
 
 filegroup(

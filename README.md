@@ -77,6 +77,24 @@ openapi_generate(
     spec = "openapi.yaml",
     generator = "go-server",
 )
+
+go_library(
+    name = "webserver#lib",
+    srcs = [":generate"],
+)
+
+go_binary(
+    name = "webserver",
+    srcs = ["main.go"],
+    deps = [":webserver#lib"],
+)
+
+openapi_test(
+    name = "test",
+    spec_url = "http://localhost:8080/openapi.yaml",
+    webserver = ":webserver",
+    sandbox = True,
+)
 ```
 
 Note that `openapi_generator` is labeled for use with `plz generate`.

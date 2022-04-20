@@ -12,10 +12,10 @@ filegroup(
 
 openapi_generate(
     name = "petstore#gen",
-    spec = ":petstore#spec",
     config = ":petstore#config",
     generator = "go-server",
     out_dirs = ["go"],
+    spec = ":petstore#spec",
 )
 
 go_library(

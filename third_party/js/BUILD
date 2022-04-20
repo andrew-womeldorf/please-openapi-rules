@@ -1,5 +1,24 @@
 subinclude("///js//build_defs:js")
+
 package(default_visibility = ["PUBLIC"])
+
+yarn_binary(
+    name = "openapi-cli",
+    bin_name = "openapi",
+    package = ":@redocly--openapi-cli",
+)
+
+yarn_binary(
+    name = "redoc-cli-bin",
+    bin_name = "redoc-cli",
+    package = ":redoc-cli",
+)
+
+yarn_binary(
+    name = "spectral-cli",
+    bin_name = "spectral",
+    package = ":@stoplight--spectral-cli",
+)
 
 yarn_library(
     name = "@asyncapi--specs",
@@ -875,10 +894,7 @@ yarn_library(
 yarn_library(
     name = "async",
     package_name = "async",
-    version = "2.6.3",
-    deps = [
-        ":lodash",
-    ],
+    version = "3.2.0",
 )
 
 yarn_library(
@@ -1092,12 +1108,12 @@ yarn_library(
     deps = [
         ":anymatch",
         ":braces",
+        ":fsevents",
         ":glob-parent",
         ":is-binary-path",
         ":is-glob",
         ":normalize-path",
         ":readdirp",
-        ":fsevents",
     ],
 )
 
@@ -1634,8 +1650,8 @@ yarn_library(
         ":minimist",
         ":neo-async",
         ":source-map",
-        ":wordwrap",
         ":uglify-js",
+        ":wordwrap",
     ],
 )
 
@@ -2646,7 +2662,7 @@ yarn_library(
 )
 
 yarn_library(
-    name = "redoc-cli-lib",
+    name = "redoc-cli",
     package_name = "redoc-cli",
     version = "0.13.10",
     deps = [
@@ -2770,7 +2786,7 @@ yarn_library(
 yarn_library(
     name = "semver",
     package_name = "semver",
-    version = "5.7.1",
+    version = "6.3.0",
 )
 
 yarn_library(
@@ -3330,22 +3346,4 @@ yarn_library(
     name = "yargs-parser",
     package_name = "yargs-parser",
     version = "21.0.1",
-)
-
-yarn_binary(
-    name = "openapi-cli",
-    bin_name = "openapi",
-    package = ":@redocly--openapi-cli",
-)
-
-yarn_binary(
-    name = "redoc-cli",
-    bin_name = "redoc-cli",
-    package = ":redoc-cli-lib",
-)
-
-yarn_binary(
-    name = "spectral-cli",
-    bin_name = "spectral",
-    package = ":@stoplight--spectral-cli",
 )
