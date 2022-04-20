@@ -13,23 +13,24 @@ openapi_lint(
 openapi_lint(
     name = "single_list",
     srcs = ["petstore.yaml"],
+    out = "single_list.sh",
     entrypoint = "petstore.yaml",
     linters = ["redocly"],
-    out = "single_list.sh"
 )
 
 openapi_lint(
     name = "single_dict",
     srcs = [
-        "petstore.yaml"
+        "petstore.yaml",
     ],
+    out = "single_dict.sh",
     entrypoint = "petstore.yaml",
     linters = {
         "redocly": [
-            "--format", "json",
+            "--format",
+            "json",
         ],
     },
-    out = "single_dict.sh"
 )
 
 openapi_lint(
@@ -38,13 +39,14 @@ openapi_lint(
         "petstore.yaml",
         "spectral-different-name.json",
     ],
+    out = "spectral-ruleset-overwrite.sh",
     entrypoint = "petstore.yaml",
     linters = {
         "spectral": [
-            "--ruleset", "$(location spectral-different-name.json)",
+            "--ruleset",
+            "$(location spectral-different-name.json)",
         ],
     },
-    out = "spectral-ruleset-overwrite.sh"
 )
 
 openapi_lint(
@@ -53,6 +55,6 @@ openapi_lint(
         "petstore.yaml",
         "spectral.json",
     ],
-    entrypoint = "petstore.yaml",
     out = "all_linters.sh",
+    entrypoint = "petstore.yaml",
 )

@@ -1,4 +1,5 @@
 subinclude("///js//build_defs:js")
+
 package(default_visibility = ["PUBLIC"])
 
 yarn_binary(
@@ -1107,12 +1108,12 @@ yarn_library(
     deps = [
         ":anymatch",
         ":braces",
+        ":fsevents",
         ":glob-parent",
         ":is-binary-path",
         ":is-glob",
         ":normalize-path",
         ":readdirp",
-        ":fsevents",
     ],
 )
 
@@ -1649,8 +1650,8 @@ yarn_library(
         ":minimist",
         ":neo-async",
         ":source-map",
-        ":wordwrap",
         ":uglify-js",
+        ":wordwrap",
     ],
 )
 

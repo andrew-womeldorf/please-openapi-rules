@@ -12,27 +12,27 @@ filegroup(
 
 openapi_lint(
     name = "lint",
-    linters = "redocly",
     srcs = [
         "petstore.yaml",
     ],
     entrypoint = "petstore.yaml",
+    linters = "redocly",
 )
 
 openapi_generate(
     name = "petstore#gen",
-    spec = ":spec",
     config = ":petstore#config",
     generator = "go-server",
     out_dirs = ["go"],
+    spec = ":spec",
 )
 
 go_library(
     name = "validate",
     srcs = [
-            ":petstore#gen",
-            "api_spec.go",
-            "service.go",
+        "api_spec.go",
+        "service.go",
+        ":petstore#gen",
     ],
     resources = [":spec"],
     deps = ["//third_party/go:mux"],
@@ -46,7 +46,7 @@ go_binary(
 
 openapi_test(
     name = "test",
+    sandbox = True,
     spec_url = "http://localhost:8080/openapi.yaml",
     webserver = ":example",
-    sandbox = True,
 )

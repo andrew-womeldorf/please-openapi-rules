@@ -65,11 +65,11 @@ pip_library(
 pip_library(
     name = "hypothesis",
     version = "6.43.3",
+    zip_safe = False,
     deps = [
         ":attrs",
         ":sortedcontainers",
     ],
-    zip_safe = False,
 )
 
 pip_library(
@@ -143,8 +143,8 @@ pip_library(
 
 pip_library(
     name = "py",
-    version = "1.11.0",
     licences = ["..."],
+    version = "1.11.0",
 )
 
 pip_library(
