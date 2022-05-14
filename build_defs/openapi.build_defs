@@ -226,6 +226,7 @@ def openapi_test(name: str, spec_url: str, webserver: str, extra_flags: list=[],
         test_cmd = [
             "($DATA_WEBSERVER &)",
             f"$TOOL run {spec_url} {flags}",
+            exit $?
         ],
         sandbox = sandbox,
         test_tools = CONFIG.OPENAPI.VALIDATE_TOOL,
