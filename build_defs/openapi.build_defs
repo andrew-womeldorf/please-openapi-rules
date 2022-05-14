@@ -194,7 +194,7 @@ def openapi_docs(name: str, srcs: list, entrypoint: str, out: str="openapi.html"
         visibility = visibility,
     )
 
-def openapi_test(name: str, spec_url: str, webserver: str, extra_flags: list=[], deps: list=[], data: list|dict=None, sandbox: bool=None, labels:list&features&tags=[], visibility: list=["PUBLIC"]):
+def openapi_test(name: str, spec_url: str, webserver: str, extra_flags: list=[], deps: list=[], data: list|dict=None, sandbox: bool=None, labels:list&features&tags=[], visibility: list=["PUBLIC"], timeout: int=0, flaky:bool|int=0, size:str=None, exit_on_error:bool=CONFIG.EXIT_ON_ERROR):
     """Test an openapi spec against a running server 
 
     Args:
@@ -208,6 +208,12 @@ def openapi_test(name: str, spec_url: str, webserver: str, extra_flags: list=[],
                       including networking, process, IPC, etc. Only has an effect on Linux.
                       If this is on by default then tests can opt out by setting this to False.
       visibility (list): Visibility specification for the rule.
+      timeout (int): Length of time in seconds to allow the test to run for before killing it.
+                             be made available.
+      flaky (bool | int): If true the test will be marked as flaky and automatically retried.
+      size (str): Test size (enormous, large, medium or small).
+      exit_on_error: If true, the executed command will fail immediately on any error (i.e. it is
+                     executed in a shell with -e).
     """
 
     flags = ' '.join(["--junit-xml", "$RESULTS_FILE"] + extra_flags)
@@ -225,4 +231,8 @@ def openapi_test(name: str, spec_url: str, webserver: str, extra_flags: list=[],
         test_tools = CONFIG.OPENAPI.VALIDATE_TOOL,
         labels = labels + _DEFAULT_OPENAPI_LABELS,
         visibility = visibility,
+        timeout = timeout,
+        flaky = flaky,
+        size = size,
+        exit_on_error = exit_on_error,
     )
